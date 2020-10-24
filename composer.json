@@ -1,0 +1,44 @@
+{
+    "name": "freedomcore/laravel-swagger",
+    "description": "Swagger documentation generator for Laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zhivolupov Ivan",
+            "homepage": "https://freedomcore.ru",
+            "email": "ivan.zhivolupov@freedomcore.ru"
+        }
+    ],
+    "require": {
+        "phpdocumentor/reflection-docblock": "^5.2"
+    },
+    "require-dev": {
+        "php": "^7.3",
+        "laravel/passport": "^10.0",
+        "phpunit/phpunit": "^9.3",
+        "orchestra/testbench": "^6.2.0"
+    },
+    "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "FreedomCore\\Swagger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FreedomCore\\Swagger\\Tests\\": "tests/"
+        }
+    },
+    "suggest": {
+        "ext-yaml": "Required to generate YAML"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FreedomCore\\Swagger\\SwaggerServiceProvider"
+            ]
+        }
+    }
+}

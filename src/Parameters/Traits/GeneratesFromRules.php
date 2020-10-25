@@ -77,7 +77,52 @@ trait GeneratesFromRules {
             return [];
         }
         [$_parameter, $values] = explode(':', $in);
-        return explode(',', $values);
+        return explode(',', str_replace('"', '', $values));
+    }
+
+    /**
+     * Get default value for rule
+     * @param array $parameterRules
+     * @return string|null
+     */
+    protected function getDefaultValue(array $parameterRules): ?string {
+        foreach ($parameterRules as $rule) {
+            if (Str::startsWith($rule, 'swagger_default')) {
+                [$key, $value] = explode(':', $rule);
+                return trim($value);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get min value
+     * @param array $parameterRules
+     * @return string|null
+     */
+    protected function getMinValue(array $parameterRules) {
+        foreach ($parameterRules as $rule) {
+            if (Str::startsWith($rule, 'swagger_min')) {
+                [$key, $value] = explode(':', $rule);
+                return trim($value);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get min value
+     * @param array $parameterRules
+     * @return string|null
+     */
+    protected function getMaxValue(array $parameterRules) {
+        foreach ($parameterRules as $rule) {
+            if (Str::startsWith($rule, 'swagger_max')) {
+                [$key, $value] = explode(':', $rule);
+                return trim($value);
+            }
+        }
+        return null;
     }
 
     /**

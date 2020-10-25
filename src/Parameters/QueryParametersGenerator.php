@@ -43,6 +43,9 @@ class QueryParametersGenerator implements ParametersGenerator {
             $parameterRules = $this->splitRules($rule);
             $enums = $this->getEnumValues($parameterRules);
             $type = $this->getParameterType($parameterRules);
+            $default = $this->getDefaultValue($parameterRules);
+            $min = $this->getMinValue($parameterRules);
+            $max = $this->getMaxValue($parameterRules);
 
             if ($this->isArrayParameter($parameter)) {
                 $key = $this->getArrayKey($parameter);
@@ -51,15 +54,29 @@ class QueryParametersGenerator implements ParametersGenerator {
             }
 
             $parameterObject = [
-                'name'          =>  $parameter,
                 'in'            =>  $this->getParameterLocation(),
+                'name'          =>  $parameter,
                 'description'   =>  '',
-                'type'          =>  $type,
                 'required'      =>  $this->isParameterRequired($parameterRules)
             ];
 
             if (\count($enums) > 0) {
                 Arr::set($parameterObject, 'enum', $enums);
+            } else {
+                Arr::set($parameterObject, 'schema.type', $type);
+            }
+
+            if ($default) {
+                settype($default, $type);
+                Arr::set($parameterObject, 'schema.default', $default);
+            }
+            if ($min) {
+                settype($min, $type);
+                Arr::set($parameterObject, 'schema.minimum', $min);
+            }
+            if ($max) {
+                settype($max, $type);
+                Arr::set($parameterObject, 'schema.maximum', $max);
             }
 
             if ($type === 'array') {

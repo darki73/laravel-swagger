@@ -38,6 +38,11 @@ return [
     'views'                     =>  base_path('resources/views/vendor/swagger'),
 
     /**
+     * API Translations Path
+     */
+    'translations'              =>  base_path('resources/lang/vendor/swagger'),
+
+    /**
      * Servers list
      * ['https://server.name.org'] OR [ [ "url" => "", "description" => "" ] ]
      */

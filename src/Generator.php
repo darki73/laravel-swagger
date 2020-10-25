@@ -362,7 +362,6 @@ class Generator {
             }
             $parameters = array_merge($parameters, $parametersGenerator->getParameters());
         }
-
         if (\count($parameters) > 0) {
             Arr::set($information, $key, $parameters);
         }

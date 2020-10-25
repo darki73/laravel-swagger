@@ -65,3 +65,28 @@ You can have multiple `@Response` decorators
 */
 public function someMethod(Request $request) {}
 ```
+
+### Custom Validators
+These validators are made purely for visual purposes, however, some of them can actually do validation
+
+#### swagger_default
+```php
+$rules = [
+    'locale'        =>  'swagger_default:en_GB'
+];
+```
+#### swagger_min
+```php
+$rules = [
+    'page'          =>  'swagger_default:1|swagger_min:1', // This will simply display the 'minimum' value in the documentation
+    'page'          =>  'swagger_default:1|swagger_min:1:fail' // This will also fail if the `page` parameter will be less than 1
+];
+```
+
+#### swagger_max
+```php
+$rules = [
+    'take'          =>  'swagger_default:1|swagger_min:1|swagger_max:50', // This will simply display the 'maximum' value in the documentation
+    'take'          =>  'swagger_default:1|swagger_min:1|swagger_max:50:fail' // This will also fail if the `take` parameter will be greater than 50
+];
+```
